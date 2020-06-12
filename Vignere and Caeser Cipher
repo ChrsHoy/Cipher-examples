@@ -1,0 +1,172 @@
+ //#include "pch.h"
+// Cipher2.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+
+
+#include <iostream>
+#include <cstring>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+
+        //std::string StrIn = "abcdefghijklmnopqrstuvwxyz";
+        char letter;
+        int ascval;
+        //char check[1];
+        bool check1;
+        bool check2;
+
+        char vc[256];
+        //char vc[];    
+        //std::string vc;
+
+
+        int cc;
+
+
+        while (true)
+        {
+
+                std::cout << " Enter '1' for vignere cipher and '0' for ceaser cipher " << std::endl;
+                //fgets(check, 0, stdin);
+                std::cin >> check1;
+                /*
+                std::cin.clear();
+                std::cin.ignore();
+                */
+
+                if (check1 == 1)
+                {       
+                		//Test 1
+                		//cipher=bat
+            			std::string StrIn = "jnlbnbuywpightafstnemiighoofrtodhwekbgtjntodxypxdtbogwjfyfrxotkfsnmtlblufrmfigttxjn";
+            			//sampletext
+                        //abcdefghijklmnopqrstuvwxyz
+                        //jnlbnbuywpightafstnemiighoofrtodhwekbgtjntodxypxdtbogwjfyfrxotkfsnmtlblufrmfigttxjn
+                        std::cin.clear();
+                        std::cin.ignore();
+
+                        std::cout << " Enter ciphertext in lowercase " << std::endl;
+
+                        std::fgets(vc, 256, stdin);
+                        
+                        std::cout << " Enter '1' to encrypt or '0' to decrypt " << std::endl;
+                        std::cin >> check2;
+
+                        if(check2==1)
+                        { 
+                                for (int i = 0; i < StrIn.length(); i++)
+                                {
+
+                                        //Unhandled exception at 0x00D9A242 in Cipher2.exe: 0xC0000094: Integer division by zero. occurred
+                                        letter = StrIn[i];
+
+                                        StrIn[i] = StrIn[i] + int(vc[i % ((unsigned)strlen(vc) - 1)]) % 97;
+
+                                        ascval = int(letter) + int(vc[i % ((unsigned)strlen(vc) - 1)]) % 97;
+
+
+                                        if (ascval > 122)
+                                        {
+                                                StrIn[i] -= 26;
+                                        }
+
+                                        std::cout << StrIn[i];
+                                }
+
+
+                        }
+                        else if (check2 == 0)
+                        {
+                                for (int i = 0; i < StrIn.length(); i++)
+                                {
+
+                                        //Unhandled exception at 0x00D9A242 in Cipher2.exe: 0xC0000094: Integer division by zero. occurred
+                                        letter = StrIn[i];
+
+                                        StrIn[i] = StrIn[i] - int(vc[i % ((unsigned)strlen(vc) - 1)]) % 97;
+
+                                        ascval = int(letter) - int(vc[i % ((unsigned)strlen(vc) - 1)]) % 97;
+
+
+                                        if (ascval <97)
+                                        {
+                                                StrIn[i] += 26;
+                                        }
+
+                                        std::cout << StrIn[i];
+                                }
+
+                        }
+                        //std::cout << ascval;
+                        std::cin.get();
+                }
+
+
+
+
+                else if (check1 == 0)
+                {
+                        std::string StrIn = "abcdefghijklmnopqrstuvwxyz";
+                        std::cout << "Enter your caeser shifter: " << std::endl;
+                        std::cin >> cc;
+
+                        std::cout << " Enter '1' to encrypt or '0' to decrypt " << std::endl;
+                        std::cin >> check2;
+
+                        if (check2 == 1)
+                        {
+                                for (int i = 0; i < StrIn.length(); i++)
+                                {
+
+                                        letter = StrIn[i];
+                                        StrIn[i] = StrIn[i] + cc % 26;
+                                        ascval = int(letter) + cc % 26;
+
+
+                                        if (ascval > 122)
+                                        {
+
+                                                StrIn[i] = (ascval % 123) + 97;
+                                        }
+
+
+
+                                }
+                                //std::cout << StrIn << "\n";
+                                printf("%s\n", StrIn.c_str());
+                                std::cin.get();
+                        }
+
+                        else if (check2 == 0)
+                        {
+                                for (int i = 0; i < StrIn.length(); i++)
+                                {
+
+                                        letter = StrIn[i];
+                                        StrIn[i] = StrIn[i] - cc % 26;
+                                        ascval = int(letter) - cc % 26;
+
+
+                                        if (ascval <97)
+                                        {
+
+                                                StrIn[i] = 123 - 97%(ascval);
+                                        }
+
+
+
+                                }
+                                //std::cout << StrIn << "\n";
+                                printf("%s\n", StrIn.c_str());
+                                std::cin.get();
+                        }
+                }
+
+        }
+}
+
